@@ -8,8 +8,9 @@
 #include "Recipe6.h"
 #include "Recipe8.h"
 #include "Recipe9.h"
+#include "Recipe10.h"
 
 int main()
 {
-    return Tests::execute();
+    return Recipe10::execute();
 }
