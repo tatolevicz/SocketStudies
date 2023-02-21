@@ -10,7 +10,7 @@
 
 #define CHECK_ERROR(ec) \
     if ((ec).value() != 0) { \
-        std::cerr << "Failed to parse ip address: " << (ec).value() << " Message: " << (ec).message() << "\n"; \
+        std::cerr << "Failed! : " << (ec).value() << " Message: " << (ec).message() << "\n"; \
         return (ec).value(); \
     }
 
