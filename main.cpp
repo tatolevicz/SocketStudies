@@ -11,5 +11,5 @@
 
 int main()
 {
-    return Recipe9::execute();
+    return Tests::execute();
 }

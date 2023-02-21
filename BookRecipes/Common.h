@@ -23,6 +23,12 @@
         return (ec).value(); \
     }
 
+#define CHECK_ERROR_VOID(ec) \
+    if ((ec).value() != 0) { \
+       std::cerr << ERROR(ec.message(), ec.value()); \
+       return; \
+    }
+
 
 using boost::asio::ip::tcp;
 

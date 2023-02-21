@@ -10,14 +10,18 @@ using namespace boost;
 
 //Recipe 9 -> Writing synchronously
 // Page 50 ~=  kindle book: Boost.Asio c++ programing
-void Recipe9::writeToSocket(boost::asio::ip::tcp::socket& sock, const std::string& message){
+void Recipe9::writeToSocket_1(boost::asio::ip::tcp::socket& sock, const std::string& message){
     std::size_t totalBytesWritten = 0;
     while(totalBytesWritten < message.length()){
         auto output_buffer =  asio::buffer(message.c_str() + totalBytesWritten, message.length() - totalBytesWritten);
         totalBytesWritten += sock.write_some(output_buffer);
+        std::cout << "Bytes written: " << totalBytesWritten << "\n";
     }
+}
 
-    return;
+void Recipe9::writeToSocket_2(boost::asio::ip::tcp::socket& sock, const std::string& message){
+    auto output_buffer =  asio::buffer(message);
+    asio::write(sock,output_buffer);
 }
 
 int Recipe9::execute() {
@@ -40,7 +44,9 @@ int Recipe9::execute() {
 
     try{
         while(true) {
-            writeToSocket(sock, "Oi gatão!!!\n");
+            std::string message = "";
+            message += "There are many variations \n";
+            writeToSocket_2(sock, message);
         }
     }
     catch(system::system_error& e){

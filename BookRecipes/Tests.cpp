@@ -11,6 +11,11 @@ using namespace boost;
 
 //TESTING EVERYTHING TOGETHER
 
+void Tests::writeToSocket(boost::asio::ip::tcp::socket& sock, const std::string& message){
+    auto output_buffer =  asio::buffer(message);
+    asio::write(sock,output_buffer);
+}
+
 int Tests::execute(){
 
     //RESOLVING HOST
@@ -34,10 +39,7 @@ int Tests::execute(){
 
     //SEND A TEST MESSAGE TO THE HOST
     const std::string message = "Hello world!\n";
-    asio::const_buffers_1 output_buf = asio::buffer(message);
-    sock.send(output_buf);
-
-
+    writeToSocket(sock, message);
 
     return 0;
 }
