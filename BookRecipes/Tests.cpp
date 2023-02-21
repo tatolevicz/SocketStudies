@@ -2,18 +2,18 @@
 // Created by Arthur Motelevicz on 20/02/23.
 //
 
-#include "Recipe6.h"
+#include "Tests.h"
 #include <boost/asio.hpp>
 #include <iostream>
 #include "Common.h"
 
 using namespace boost;
 
-//Recipe 5 -> CONNECTING A SOCKET
-// Position 821 kindle book: Boost.Asio c++ programing
+//TESTING EVERYTHING TOGETHER
 
-int Recipe6::execute(){
+int Tests::execute(){
 
+    //RESOLVING HOST
     std::string host = "localhost";
     std::string port_num = "1234";
 
@@ -27,10 +27,17 @@ int Recipe6::execute(){
     asio::ip::tcp::resolver::iterator it = resolver.resolve(resolver_query, ec);
     CHECK_ERROR(ec)
 
+    //CONNECTING SOCKET TO BEST ENDPOINT AVAILABLE
     asio::ip::tcp::socket sock(ios);
-
     asio::connect(sock,it,ec);
     CHECK_ERROR(ec)
-    
+
+    //SEND A TEST MESSAGE TO THE HOST
+    const std::string message = "Hello world!\n";
+    asio::const_buffers_1 output_buf = asio::buffer(message);
+    sock.send(output_buf);
+
+
+
     return 0;
 }
