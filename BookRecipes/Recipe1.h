@@ -8,7 +8,8 @@
 
 class Recipe1 {
 public:
-    static int execute();
+    static int executeClient();
+    static int executeServer();
 };
 
 
