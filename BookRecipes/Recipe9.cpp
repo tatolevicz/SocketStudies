@@ -47,7 +47,5 @@ int Recipe9::execute() {
         std::cerr << "Error occurred: " << e.code() << " Message: " << e.what() <<"\n";
     }
 
-
     return 0;
-
 }

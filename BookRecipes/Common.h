@@ -17,10 +17,9 @@
 #define ERROR(msg, code) \
     "Error " << code << " in: " << __MAKE_FILELINE << ": " << msg << "\n"
 
-
 #define CHECK_ERROR(ec) \
     if ((ec).value() != 0) { \
-        std::cerr << ERROR(ec.message(), ec.value()); \
+       std::cerr << ERROR(ec.message(), ec.value()); \
         return (ec).value(); \
     }
 
