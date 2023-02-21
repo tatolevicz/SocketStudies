@@ -5,11 +5,12 @@
 #include "Recipe1.h"
 #include <boost/asio.hpp>
 #include <iostream>
-
+#include "Common.h"
 
 using namespace boost;
 
-//Recipe 1 -> Position 436 kindle book: Boost.Asio c++ programing
+//Recipe 1 -> CREATING ENDPOINTS
+// Position 436 kindle book: Boost.Asio c++ programing
 int Recipe1::executeClient(){
 
     std::string raw_ip_address = "192.168.1.234";
@@ -18,10 +19,7 @@ int Recipe1::executeClient(){
     system::error_code ec;
     asio::ip::address ip_adress = asio::ip::address::from_string(raw_ip_address, ec);
 
-    if(ec.value() != 0){
-        std::cerr << "Failed to parse ip address: " << ec.value() << " Message: " << ec.message() << "\n";
-        return ec.value();
-    }
+    CHECK_ERROR(ec)
 
     asio::ip::tcp::endpoint ep(ip_adress, port_num);
 
