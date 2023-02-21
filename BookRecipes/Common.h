@@ -8,9 +8,20 @@
 #include <boost/asio.hpp>
 #include <iostream>
 
+
+#define __STRINGIZE_I(x) #x
+#define __STRINGIZE(x) __STRINGIZE_I(x)
+
+#define __MAKE_FILELINE \
+    __FILE__ "(" __STRINGIZE(__LINE__) ")"
+
+#define ERROR(msg) \
+    "Error in: " << __MAKE_FILELINE << ": " << msg << "\n"
+
+
 #define CHECK_ERROR(ec) \
     if ((ec).value() != 0) { \
-        std::cerr << "Failed! : " << (ec).value() << " Message: " << (ec).message() << "\n"; \
+        std::cerr << ERROR(ec.message()); \
         return (ec).value(); \
     }
 
