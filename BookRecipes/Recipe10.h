@@ -10,7 +10,10 @@
 
 class Recipe10 {
 public:
-    static std::string readFromSocket(boost::asio::ip::tcp::socket& sock);
+    static std::string readFromSocket_1(boost::asio::ip::tcp::socket& sock);
+    static std::string readFromSocket_2(boost::asio::ip::tcp::socket& sock);
+    static std::string readFromSocket_3(boost::asio::ip::tcp::socket& sock);
+
     static int execute();
 };
 
