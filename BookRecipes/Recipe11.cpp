@@ -9,6 +9,12 @@
 
 using namespace boost;
 
+struct Recipe11::Session{
+    std::shared_ptr<asio::ip::tcp::socket> sock;
+    std::string buff;
+    std::size_t total_bytes_written;
+};
+
 //WRITE SOME ASYNC- Pag 63
 int Recipe11::execute() {
 
@@ -25,23 +31,38 @@ int Recipe11::execute() {
     CHECK_ERROR(ec)
 
     //creat open connect socket
-    asio::ip::tcp::socket sock(ioc);
-    asio::connect(sock,endpoints,ec);
+    std::shared_ptr<asio::ip::tcp::socket> sock( new asio::ip::tcp::socket(ioc));
+    asio::connect(*sock.get(),endpoints,ec);
     CHECK_ERROR(ec)
 
-    //create output buffer
-    const std::string message = "Esta aqui é minha mensagem pra você!\n";
-    asio::const_buffers_1 outputBuffer = asio::buffer(message);
-
-    auto writeCB = [&](const system::error_code& ec, std::size_t bytes_transferred){
-        CHECK_ERROR(ec)
-        std::cout << "Wrote: " << bytes_transferred << " Bytes" << "\n";
-    };
-
-    sock.async_write_some(outputBuffer,writeCB);
+    writeToSocketAsync(sock, "Minha menssagem nova!\n");
     ioc.run();
-
 
     return 0;
 }
 
+void Recipe11::writeCB(const system::error_code& ec, std::size_t bytes_transferred, std::shared_ptr<Recipe11::Session> s){
+    CHECK_ERROR_VOID(ec)
+
+    s->total_bytes_written += bytes_transferred;
+    if(s->total_bytes_written >= s->buff.length())
+        return;
+
+    callAsyncWrite(s);
+}
+
+void Recipe11::writeToSocketAsync(std::shared_ptr<boost::asio::ip::tcp::socket> sock, const std::string& message){
+
+    std::shared_ptr<Session> s(new Session);
+    s->buff = message;
+    s->total_bytes_written = 0;
+    s->sock = sock;
+
+    callAsyncWrite(s);
+}
+
+void Recipe11::callAsyncWrite(const std::shared_ptr<Session>& s){
+    s->sock->async_write_some(
+            asio::buffer(s->buff.c_str() + s->total_bytes_written, s->buff.length() - s->total_bytes_written),
+            std::bind(writeCB,std::placeholders::_1, std::placeholders::_2, s));
+}
