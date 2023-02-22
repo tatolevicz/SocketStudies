@@ -12,14 +12,14 @@ std::string Recipe10::readFromSocket(boost::asio::ip::tcp::socket& sock){
     unsigned int MSG_MAX_SIZE_BYTES = 1;
     std::unique_ptr<char[]> buf(new char[MSG_MAX_SIZE_BYTES]);
 
-    int totalBytesWritten = 0;
+    size_t totalBytesWritten = 0;
 
     while(totalBytesWritten < MSG_MAX_SIZE_BYTES){
         asio::mutable_buffers_1 inputBuffer = asio::buffer(buf.get() + totalBytesWritten, MSG_MAX_SIZE_BYTES - totalBytesWritten);
         totalBytesWritten += sock.read_some(inputBuffer);
     }
 
-    std::string output = std::string(buf.get());
+    std::string output = std::string(buf.get(),totalBytesWritten);
     return output;
 }
 
