@@ -71,7 +71,7 @@ int Recipe10::execute() {
 
    try {
        while (true) {
-           auto message = readFromSocket_2(sock, '#');
+           auto message = readFromSocket_2(sock);
            if (!message.empty()) {
                std::cout << message;
                if (message == "q")
