@@ -8,7 +8,7 @@
 
 using namespace boost;
 
-//Recipe 9 -> Writing synchronously
+//Recipe14 9 -> Writing synchronously
 // Page 50 ~=  kindle book: Boost.Asio c++ programing
 void Recipe9::writeToSocket_1(boost::asio::ip::tcp::socket& sock, const std::string& message){
     std::size_t totalBytesWritten = 0;

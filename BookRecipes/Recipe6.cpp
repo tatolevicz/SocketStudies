@@ -9,7 +9,7 @@
 
 using namespace boost;
 
-//Recipe 5 -> CONNECTING A SOCKET
+//Recipe14 5 -> CONNECTING A SOCKET
 // Position 821 kindle book: Boost.Asio c++ programing
 
 int Recipe6::execute(){
@@ -31,6 +31,6 @@ int Recipe6::execute(){
 
     asio::connect(sock,it,ec);
     CHECK_ERROR(ec)
-    
+
     return 0;
 }

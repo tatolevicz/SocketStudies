@@ -24,7 +24,7 @@ int Recipe13::execute() {
     auto endpoints = resolver.resolve(q,ec);
     CHECK_ERROR(ec)
 
-    //creat open connect socket
+    //create open connect socket
     std::shared_ptr<asio::ip::tcp::socket> sock( new asio::ip::tcp::socket(ioc));
     asio::connect(*sock.get(),endpoints,ec);
     CHECK_ERROR(ec)
@@ -40,6 +40,7 @@ void Recipe13::readCB(const system::error_code& ec, std::size_t bytes_transferre
     CHECK_ERROR_VOID(ec)
     std::cout << buf;
     readFromSocketAsync(sock);
+    delete buf;
 }
 
 
@@ -47,5 +48,5 @@ void Recipe13::readFromSocketAsync(std::shared_ptr<boost::asio::ip::tcp::socket>
     std::size_t size_ = 1;
     char* buf = new char[size_];
     asio::mutable_buffers_1 out_buffer = asio::buffer(buf, size_);
-    asio::async_read(*sock.get(), out_buffer, std::bind(readCB,std::placeholders::_1, std::placeholders::_2, sock, buf));
+    asio::async_read(*sock, out_buffer, std::bind(readCB,std::placeholders::_1, std::placeholders::_2, sock, buf));
 }
