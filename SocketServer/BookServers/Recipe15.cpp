@@ -16,10 +16,15 @@ void Recipe15::processRequest(boost::asio::ip::tcp::socket& sock){
     system::error_code ec;
     asio::read(sock, request_buf,ec);
 
+    std::string requestData(asio::buffers_begin(request_buf.data()),
+                            asio::buffers_end(request_buf.data()));
+
+    std::cout << "Client message:  "<< requestData << "\n";
+
     if(ec != asio::error::eof)
         throw system::system_error(ec);
 
-    const char response_buf[] = "Message read until the end!\n" ;
+    const char response_buf[] = {'M','e','s','s','a','g','e',' ','r','e','a','d','!'};
 
     asio::write(sock, asio::buffer(response_buf));
 

@@ -23,7 +23,7 @@ void Recipe15::communicate(boost::asio::ip::tcp::socket &sock){
         std::string response_data(boost::asio::buffers_begin(responseBuf.data()),
                                   boost::asio::buffers_end(responseBuf.data()));
 
-        std::cout << "Response data: " << response_data << std::endl;
+        std::cout << "Response data: " << response_data << "\n";
         std::cout << "Message EOF!\n";
     }
     else{
