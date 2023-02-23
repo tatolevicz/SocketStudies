@@ -32,21 +32,21 @@ int Recipe14::execute() {
         std::shared_ptr<asio::ip::tcp::socket> sock(new asio::ip::tcp::socket(ioc));
 
         //async connect using bing
-        system::error_code ec;
-        auto endpoints = resolver.resolve(q,ec);
-        CHECK_ERROR(ec)
-        asio::async_connect(*sock,endpoints, std::bind(onConnect, std::placeholders::_1, std::placeholders::_2, sock));
+//        system::error_code ec;
+//        auto endpoints = resolver.resolve(q,ec);
+//        CHECK_ERROR(ec)
+//        asio::async_connect(*sock,endpoints, std::bind(onConnect, std::placeholders::_1, sock));
 
         //or this option with lambda function
-        
-//        asio::async_connect(*sock, resolver.resolve(q),
-//       [sock](const boost::system::error_code& error, const tcp::endpoint& endpoint) {
-//           if (!error) {
-//               std::cout << "Connected to " << endpoint << std::endl;
-//           } else {
-//               std::cout << "Error: " << error.message() << std::endl;
-//           }
-//       });
+
+        asio::async_connect(*sock, resolver.resolve(q),
+       [sock](const boost::system::error_code& error, const tcp::endpoint& endpoint) {
+           if (!error) {
+               std::cout << "Connected to " << endpoint << std::endl;
+           } else {
+               std::cout << "Error: " << error.message() << std::endl;
+           }
+       });
 
         std::thread worker([&ioc]() {
             try {
