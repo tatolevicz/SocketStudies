@@ -1,5 +1,6 @@
 #include "Recipe15.h"
+#include "ServerTests.h"
 
 int main() {
-    return Recipe15::execute();
+    return ServerTests::execute();
 }
