@@ -38,6 +38,9 @@ void AsyncHandShake::writeAcceptHeaderAsync(boost::asio::ip::tcp::socket* sock, 
     system::error_code ec;
     asio::write(*sock, outputBuffer,ec);
     CHECK_ERROR(ec)
+
+    if(_cb)
+        _cb(ec);
 }
 
 void AsyncHandShake::readHeaderCB(const boost::system::error_code& ec,
