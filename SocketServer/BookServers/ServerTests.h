@@ -9,20 +9,18 @@
 
 class ServerTests {
 public:
-
-
     static void readAsync(boost::asio::ip::tcp::socket& sock);
-    static void readHeaderAsync(boost::asio::ip::tcp::socket& sock);
-    static void writeAcceptHeaderAsync(boost::asio::ip::tcp::socket& sock, const std::string& responseHeader);
-    static void readHeaderCB(const boost::system::error_code& ec,
-                       const std::size_t bytes_read,
-                       boost::asio::ip::tcp::socket* sock);
-    static void readCB_2(const boost::system::error_code& ec,
+    static void readCB(const boost::system::error_code& ec,
                        const std::size_t bytes_read,
                        boost::asio::ip::tcp::socket* sock,
-                       const char* buf);
+                       char* buf);
+
+    static void readCB_2(const boost::system::error_code& ec,
+                       const std::size_t bytes_read,
+                       boost::asio::ip::tcp::socket* sock);
     static int execute();
 
+    static void print_bytes(const char* buffer, size_t size);
 
 };
 
