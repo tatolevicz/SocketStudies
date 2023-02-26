@@ -6,11 +6,6 @@
 #include "Common.h"
 
 #include <boost/asio.hpp>
-#include <boost/asio/ssl.hpp>
-#include <boost/algorithm/string.hpp>
-#include <openssl/sha.h>
-#include <openssl/bio.h>
-#include <openssl/evp.h>
 #include <iostream>
 #include <string>
 #include "AsyncHandShake.h"

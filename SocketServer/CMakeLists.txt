@@ -8,7 +8,30 @@ project(Socket)
 
 set(CMAKE_CXX_STANDARD 17)
 
-add_executable(${PROJECT_NAME} main.cpp BookServers/Recipe15.cpp BookServers/Recipe15.h BookServers/Common.h BookServers/ServerTests.cpp BookServers/ServerTests.h BookServers/AsyncHandShake.cpp BookServers/AsyncHandShake.h)
+add_executable(${PROJECT_NAME}
+        main.cpp
+        BookServers/Recipe15.cpp
+        BookServers/Recipe15.h
+        BookServers/Common.h
+        BookServers/ServerTests.cpp
+        BookServers/ServerTests.h
+        BookServers/AsyncHandShake.cpp
+        BookServers/AsyncHandShake.h
+        GetRichVideo/GR_ChatServer.cpp
+        GetRichVideo/GR_ChatServer.h
+        GetRichVideo/GRCommon.h
+        GetRichVideo/SharedState.cpp
+        GetRichVideo/SharedState.h
+        GetRichVideo/Listener.cpp
+        GetRichVideo/Listener.h
+        GetRichVideo/HttpSession.cpp
+        GetRichVideo/HttpSession.h
+        GetRichVideo/WebsocketSession.cpp
+        GetRichVideo/WebsocketSession.h
+        )
+
+
+
 find_package(OpenSSL REQUIRED)
 
 if (${OPENSSL_FOUND})
@@ -34,4 +57,6 @@ target_link_libraries( ${PROJECT_NAME} PUBLIC
 )
 target_include_directories(${PROJECT_NAME} PUBLIC
         BookServers
+        OLC_Playlist
+        GetRichVideo
         )

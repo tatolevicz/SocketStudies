@@ -2,7 +2,7 @@
 // Created by Arthur Motelevicz on 22/02/23.
 //
 
-#ifndef SOCKET_COMMON_H
+#ifndef SOCKET_GRCOMMON_H
 #define SOCKET_COMMON_H
 //
 // Created by Arthur Motelevicz on 20/02/23.
@@ -75,4 +75,4 @@ public:
 
 
 
-#endif //SOCKET_COMMON_H
+#endif //SOCKET_GRCOMMON_H
