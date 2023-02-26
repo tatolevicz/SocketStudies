@@ -28,7 +28,8 @@ add_executable(${PROJECT_NAME}
         GetRichVideo/HttpSession.h
         GetRichVideo/WebsocketSession.cpp
         GetRichVideo/WebsocketSession.h
-        )
+        BookServers/PageServer.cpp
+        BookServers/PageServer.h BookServers/ServerBeast_1.cpp BookServers/ServerBeast_1.h)
 
 
 

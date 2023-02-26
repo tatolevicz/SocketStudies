@@ -31,7 +31,7 @@ void AsyncHandShake::readHeaderAsync(boost::asio::ip::tcp::socket* sock){
                            std::bind(&AsyncHandShake::readHeaderCB, this, std::placeholders::_1, std::placeholders::_2, sock));
 }
 
-void AsyncHandShake::writeAcceptHeaderAsync(boost::asio::ip::tcp::socket* sock, const std::string& responseHeader){
+void AsyncHandShake::writeAcceptHeader(boost::asio::ip::tcp::socket* sock, const std::string& responseHeader){
 
     asio::const_buffers_1 outputBuffer = asio::buffer(responseHeader.data(),responseHeader.size());
 
@@ -54,7 +54,7 @@ void AsyncHandShake::readHeaderCB(const boost::system::error_code& ec,
 
     auto responseHeader = handle_websocket_request(*_data);
 
-    writeAcceptHeaderAsync(sock, responseHeader);
+    writeAcceptHeader(sock, responseHeader);
 }
 
 std::string AsyncHandShake::generate_websocket_accept_key(const std::string& websocket_key) {

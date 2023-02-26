@@ -65,7 +65,7 @@ int ServerTests::execute(){
     acpt.accept(*sock,ec);
     CHECK_ERROR(ec)
 
-    //use out OwnAsyncHandShake class
+    //use our Own AsyncHandShake class
     /**
      * After handshake we keep a read loop but message received from postman (even though it is text ) only can be see it as bytes (maybe because it is the websocket protocol)
      */

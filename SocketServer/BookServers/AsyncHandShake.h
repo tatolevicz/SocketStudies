@@ -21,7 +21,7 @@ public:
 
 private:
   void readHeaderAsync(boost::asio::ip::tcp::socket* sock);
-  void writeAcceptHeaderAsync(boost::asio::ip::tcp::socket* sock, const std::string& responseHeader);
+  void writeAcceptHeader(boost::asio::ip::tcp::socket* sock, const std::string& responseHeader);
 
   void readHeaderCB(    const boost::system::error_code& ec,
                         const std::size_t bytes_read,
