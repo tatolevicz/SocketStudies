@@ -205,19 +205,30 @@ void HttpSession::onRead(error_code ec, std::size_t size){
 
     if(websocket::is_upgrade(_req)){
         std::make_shared<WebsocketSession>(
-                std::move(_socket), _state)->run();
+                std::move(_socket), _state)->run(std::move(_req));
+        return;
     }
 
+    // Send the response
     handle_request(_state->docRoot(), std::move(_req),
-        [this](auto&& response){
-            using response_type = typename std::decay<decltype(response)>::type;
-            auto sp = std::make_shared<response_type>(std::move(response));
+           [this](auto&& response)
+           {
+               // The lifetime of the message has to extend
+               // for the duration of the async operation so
+               // we use a shared_ptr to manage it.
+               using response_type = typename std::decay<decltype(response)>::type;
+               auto sp = std::make_shared<response_type>(std::forward<decltype(response)>(response));
 
-            http::async_write(this->_socket,*sp,
-                              [self = shared_from_this(), sp](error_code ec, std::size_t bytes){
-                self->onWrite(ec,bytes, sp->need_eof());
-            });
-        });
+
+               // Write the response
+               auto self = shared_from_this();
+               http::async_write(this->_socket, *sp,
+                                 [self, sp](
+                                         error_code ec, std::size_t bytes)
+                                 {
+                                     self->onWrite(ec, bytes, sp->need_eof());
+                                 });
+           });
 
 }
 

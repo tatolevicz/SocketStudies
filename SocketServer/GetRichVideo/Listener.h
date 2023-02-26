@@ -17,7 +17,6 @@ class Listener : public std::enable_shared_from_this<Listener>{
 
     void fail(error_code ec, char const* what);
     void onAccept(error_code ec);
-    void callAccept();
 
 public:
     Listener(

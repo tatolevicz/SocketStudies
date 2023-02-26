@@ -17,16 +17,6 @@ _state(state){
 
 }
 
-template<class Body, class Allocator>
-void WebsocketSession::run(http::request<Body, http::basic_fields<Allocator>> req){
-    _ws.async_accept(req,
-                     [self = shared_from_this()](error_code ec){
-
-        self->onAccept(ec);
-    });
-}
-
-
 void WebsocketSession::send(std::shared_ptr<std::string const> const& ss){
 
     _queue.push_back(ss);

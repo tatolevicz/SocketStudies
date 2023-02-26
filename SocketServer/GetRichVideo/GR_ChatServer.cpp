@@ -6,6 +6,7 @@
 #include "GRCommon.h"
 #include "Listener.h"
 #include "SharedState.h"
+#include <memory>
 
 namespace gr_video {
     int GR_ChatServer::execute() {
@@ -18,8 +19,7 @@ namespace gr_video {
         std::make_shared<Listener>(
                 ioc,
                 tcp::endpoint{address, port},
-                std::make_shared<SharedState(docRoot)>
-        );
+                std::make_shared<SharedState>(docRoot))->run();
 
         ioc.run();
 
