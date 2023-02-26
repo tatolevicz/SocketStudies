@@ -1,0 +1,365 @@
+@import url("https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600&display=swap");
+body {
+  background: #3bceac;
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
+}
+
+div {
+  position: relative;
+}
+
+header .container-fluid {
+  background: #3bceac;
+}
+
+.page-link {
+  margin-top: 3em;
+  font-family: "Montsserat", sans-serif;
+  font-weight: 800;
+  text-align: center;
+  background: #00000000;
+  color: #fff;
+  text-decoration: none;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  border: 0;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: horizontal;
+          flex-direction: horizontal;
+}
+
+.page-link a {
+  text-decoration: none;
+  color: #fff;
+  margin-top: 1em;
+}
+
+.page-link a:hover {
+  color: #47ffd4;
+}
+
+.page-link:hover {
+  background-color: #3bceac;
+}
+
+.header-content-left {
+  font-family: "Roboto", sans-serif;
+  letter-spacing: 2px;
+  background-repeat: no-repeat;
+}
+
+.header-content-left h1 {
+  font-family: "Oxygen", sans-serif;
+  font-weight: bold;
+  letter-spacing: 0px;
+}
+
+.header-content-left a {
+  color: #fff;
+  text-decoration: none;
+}
+
+.header-content-left a:hover {
+  color: #47ffd4;
+}
+
+.header-content-right {
+  letter-spacing: 2px;
+}
+
+.header-content-right .header-picture {
+  -webkit-box-shadow: 15px 15px 20px rgba(0, 0, 0, 0.25);
+          box-shadow: 15px 15px 20px rgba(0, 0, 0, 0.25);
+  border-radius: 343px;
+}
+
+.header-content-right a {
+  color: #fff;
+  text-decoration: none;
+  white-space: nowrap;
+}
+
+.header-content-right a:hover {
+  color: #47ffd4;
+}
+
+.effect-canvas {
+  width: 100px;
+  height: 85%;
+  margin-top: 1em;
+}
+
+.txtPresentation-picture {
+  font-size: 12px;
+  text-align: center;
+}
+
+.waveBottomHeader {
+  fill: #ee4266;
+}
+
+.projects {
+  background-color: #ee4266;
+}
+
+.projects .container-fluid {
+  background-color: #ee4266;
+}
+
+.waveTopProjects {
+  fill: #3bceac;
+}
+
+.slider {
+  display: block;
+  overflow-x: scroll;
+}
+
+.slider-container {
+  display: block;
+  white-space: nowrap;
+}
+
+.item {
+  background-color: #ffd23f;
+  display: inline-block;
+  margin-right: 4em;
+}
+
+.projects-title {
+  margin-top: 1em;
+  font-family: "Montsserat", sans-serif;
+  font-weight: 400;
+  text-align: left;
+  color: #fff;
+  text-decoration: none;
+}
+
+.project-card {
+  letter-spacing: 1px;
+  background-color: #ffd23f;
+  height: 350px;
+  -webkit-box-shadow: 15px 15px 20px rgba(0, 0, 0, 0.25);
+          box-shadow: 15px 15px 20px rgba(0, 0, 0, 0.25);
+  margin-top: 2em;
+}
+
+.project-card-title {
+  height: 20%;
+  padding: 1em;
+  color: #2f2f2f;
+  font-size: 14px;
+  font-family: "Roboto", sans-serif;
+  white-space: normal;
+}
+
+.project-card-body {
+  height: 60%;
+}
+
+.project-card-body img {
+  height: 100%;
+}
+
+.project-card-footer {
+  height: 20%;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-align: end;
+      -ms-flex-align: end;
+          align-items: flex-end;
+}
+
+.project-card-footer .btn {
+  font-family: "Montsserat", sans-serif;
+  font-weight: bold;
+  background-color: #540d6e;
+  color: #fff;
+  border-radius: 0;
+  margin: 1em;
+}
+
+.waveBottomProjects {
+  fill: #ee4266;
+}
+
+.about {
+  background-color: #540d6e;
+}
+
+.about .txtPresentation-picture {
+  color: #fff;
+}
+
+.about .txtPresentation-picture a {
+  color: #ffd23f;
+  text-decoration: none;
+}
+
+.about .txtPresentation-picture a:hover {
+  color: #47ffd4;
+}
+
+.about-content-left {
+  font-family: "Roboto", sans-serif;
+  letter-spacing: 2px;
+  background-repeat: no-repeat;
+  color: #fff;
+}
+
+.about-content-left h1 {
+  font-family: "Oxygen", sans-serif;
+  font-weight: bold;
+  letter-spacing: 0px;
+}
+
+.about-content-left a {
+  color: #ffd23f;
+  text-decoration: none;
+}
+
+.about-content-left a:hover {
+  color: #47ffd4;
+}
+
+.about-content-right {
+  font-family: "Roboto", sans-serif;
+  letter-spacing: 2px;
+  color: #fff;
+}
+
+.about-content-right a {
+  color: #ffd23f;
+  text-decoration: none;
+  white-space: nowrap;
+}
+
+.about-content-right a:hover {
+  color: #47ffd4;
+}
+
+.about-content-right .about-picture {
+  -webkit-box-shadow: 15px 15px 20px rgba(0, 0, 0, 0.25);
+          box-shadow: 15px 15px 20px rgba(0, 0, 0, 0.25);
+}
+
+.footer {
+  background-color: #2f2f2f;
+  color: #fff;
+}
+
+.footer h3 {
+  font-family: "Oxygen", sans-serif;
+  font-weight: bold;
+  font-size: 26px;
+  letter-spacing: 0px;
+}
+
+.footer p {
+  padding: 2rem;
+  padding-left: 0;
+  font-family: "Roboto", sans-serif;
+  font-size: 14px;
+  letter-spacing: 2px;
+  color: #fff;
+}
+
+.footer a {
+  font-size: 14px;
+  color: #ffd23f;
+  text-decoration: none;
+  color: #ee4266;
+}
+
+.footer a:hover {
+  color: #47ffd4;
+}
+
+.waveTopFooter {
+  fill: #540d6e;
+}
+
+body {
+  background-color: #ffd23f;
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
+}
+
+header {
+  padding-left: 0;
+  padding-right: 0;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+header .title {
+  font-family: "Tourney", cursive;
+  margin-top: 1em;
+  text-align: center;
+  font-size: 60px;
+  text-shadow: 5px 5px 5px rgba(0, 0, 0, 0.4);
+}
+
+canvas {
+  z-index: 1;
+  padding-left: 0;
+  padding-right: 0;
+  margin-left: auto;
+  margin-right: auto;
+  display: block;
+  border: 5px solid #000;
+  border-radius: 10px;
+  -webkit-box-shadow: 10px 10px 10px rgba(0, 0, 0, 0.4);
+          box-shadow: 10px 10px 10px rgba(0, 0, 0, 0.4);
+}
+
+#container-ui {
+  width: 100%;
+  height: 500px;
+}
+
+#container-ui .ui-gameover {
+  font-family: "Open Sans", sans-serif;
+  border-radius: 10px;
+}
+
+#container-ui .ui-gameover h1 {
+  margin: 1rem;
+  font-weight: 600;
+}
+
+#container-ui .ui-gameover p {
+  color: darkgrey;
+  font-weight: 400;
+}
+
+#container-ui .ui-gameover button {
+  margin: 1rem;
+  font-weight: 400;
+  color: white;
+  border-radius: 50vh;
+  width: 80%;
+}
+
+.ui-gameover {
+  z-index: 2;
+}
+
+.waveTopFooter {
+  fill: #ffd23f;
+}
+
+footer {
+  -webkit-box-sizing: normal;
+          box-sizing: normal;
+  padding-bottom: 50px;
+}
+/*# sourceMappingURL=bikeHills.css.map */
