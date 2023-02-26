@@ -3,8 +3,6 @@
 //
 
 #include "ServerTests.h"
-#include "Common.h"
-
 #include <boost/asio.hpp>
 #include <iostream>
 #include <string>
