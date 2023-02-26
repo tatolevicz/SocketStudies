@@ -17,9 +17,20 @@ namespace gr_video {
         net::io_context ioc;
 
         std::make_shared<Listener>(
-                ioc,
-                tcp::endpoint{address, port},
-                std::make_shared<SharedState>(docRoot))->run();
+            ioc,
+            tcp::endpoint{address, port},
+            std::make_shared<SharedState>(docRoot))->run();
+
+        // Capture SIGINT and SIGTERM to perform a clean shutdown
+        net::signal_set signals(ioc, SIGINT, SIGTERM);
+        signals.async_wait(
+            [&ioc](boost::system::error_code const&, int)
+            {
+                // Stop the io_context. This will cause run()
+                // to return immediately, eventually destroying the
+                // io_context and any remaining handlers in it.
+                ioc.stop();
+            });
 
         ioc.run();
 

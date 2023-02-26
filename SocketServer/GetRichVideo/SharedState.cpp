@@ -20,6 +20,9 @@ void SharedState::leave(WebsocketSession& session){
 }
 
 void SharedState::send(std::string message){
+    boost::beast::string_view messageView = message;
+    std::cout << std::hex << messageView << std::endl;
+
     auto const ss = std::make_shared<std::string const>(std::move(message));
     for(auto s : _sessions){
         s->send(ss);
