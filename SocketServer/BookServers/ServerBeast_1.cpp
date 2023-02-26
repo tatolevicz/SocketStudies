@@ -37,6 +37,7 @@ int ServerBeast_1::execute() {
     beast::http::response<beast::http::string_body> httpResp;
 
     std::shared_ptr<beast::websocket::stream<asio::ip::tcp::socket>> socketStream;
+    std::vector<std::shared_ptr<std::string>> messagesQueue;
 
     using ReadWriteCB = std::function<void (system::error_code ec, std::size_t bytes)>;
 
@@ -53,7 +54,10 @@ int ServerBeast_1::execute() {
             checkError(ec, __LINE__);
         }
 
+        messagesQueue.erase(messagesQueue.begin());
 
+        if(!messagesQueue.empty())
+            socketStream->async_write(asio::buffer(*messagesQueue.front()),onWriteSocket);
     };
 
     ReadWriteCB onReadSocket = [&](system::error_code ec, std::size_t bytes){
@@ -61,11 +65,18 @@ int ServerBeast_1::execute() {
         if(checkError(ec, __LINE__))
             return;
 
-        std::cout << "On Read Socket achieved: " << bytes << "\n";
+        //debug the payload message received
         std::string result(boost::asio::buffer_cast<const char*>(socketBuffer.data()), socketBuffer.size());
         std::cout << "Message: " << result << "\n";
+
+        //save the message to write queue
+        messagesQueue.push_back(std::make_shared<std::string>(std::move(result)));
+
         socketBuffer.consume(socketBuffer.size());
         socketStream->async_read(socketBuffer,onReadSocket);
+
+        //call the writing loop
+        socketStream->async_write(asio::buffer(*messagesQueue.front()), onWriteSocket);
     };
 
     auto onHandShake = [&](system::error_code ec){
