@@ -12,10 +12,10 @@ namespace sb {
 
 Doorman::Doorman(boost::asio::io_context& ioc,
                  boost::asio::ip::tcp::endpoint& endpoint,
-                 std::shared_ptr<ServerState> serserState) :
+                 std::shared_ptr<ServerState> serverState) :
         _sock(ioc),
         _acceptor(ioc),
-        _serverState(std::move(serserState)){
+        _serverState(std::move(serverState)){
 
     boost::system::error_code ec;
 
@@ -46,7 +46,7 @@ Doorman::Doorman(boost::asio::io_context& ioc,
 
 void Doorman::onAccept(boost::system::error_code ec) {
 
-    if(ec.value() != 0) {
+    if(!ec) {
         std::make_shared<HttpListener>(std::move(_sock), _serverState)->run();
     }
     else{

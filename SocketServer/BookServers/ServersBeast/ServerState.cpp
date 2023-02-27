@@ -13,13 +13,13 @@ ServerState::ServerState(){
 
 }
 
-std::shared_ptr<Client> ServerState::join(const std::shared_ptr<WebsocketConnection>& connection){
+std::shared_ptr<Client> ServerState::join(WebsocketConnection*  connection){
     auto client = std::make_shared<Client>(connection);
     _clients.push_back(client);
     return client;
 }
 
-void ServerState::leave(const std::shared_ptr<WebsocketConnection>& connection){
+void ServerState::leave(WebsocketConnection* connection){
     auto it = std::find_if(_clients.begin(), _clients.end(),[&](std::shared_ptr<Client> &client){
         return client->getConnection() == connection;
     });

@@ -15,13 +15,17 @@ namespace sb {
 
     class Server : public std::enable_shared_from_this<Server> {
     public:
-        Server(std::shared_ptr<ServerState> sharedState);
+        Server();
         void start();
         void stop();
 
     private:
         std::shared_ptr<ServerState> _serverState{nullptr};
         std::shared_ptr<Doorman> _doorMan{nullptr};
+
+        boost::asio::io_context _ioc;
+        boost::asio::ip::tcp::endpoint _endpoint;
+
 
     };
 

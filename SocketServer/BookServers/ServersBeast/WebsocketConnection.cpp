@@ -30,8 +30,9 @@ void WebsocketConnection::onRead(boost::system::error_code ec, std::size_t bytes
     CHECK_ASIO_ERROR_(ec)
 
     std::string message = boost::beast::buffers_to_string(_buffer.data());
-
     std::cout << "Msg: " << message << "\n";
+
+    _buffer.consume(bytes);
 
     _serverState->send(message);
 
@@ -39,21 +40,22 @@ void WebsocketConnection::onRead(boost::system::error_code ec, std::size_t bytes
 }
 
 void WebsocketConnection::callAsyncRead() {
-    _sockStream.async_read(_buffer,[&](boost::system::error_code ec, std::size_t bytes){
-        onRead(ec, bytes);
+    _sockStream.async_read(_buffer,[self = shared_from_this()](boost::system::error_code ec, std::size_t bytes){
+        self->onRead(ec, bytes);
     });
 }
 
 void WebsocketConnection::callAsyncWrite(){
     _sockStream.async_write(boost::asio::buffer(_messageQueue.front()),
-        [this](boost::system::error_code ec, std::size_t bytes){
-            onWrite(ec, bytes);
+        [self = shared_from_this()](boost::system::error_code ec, std::size_t bytes){
+            self->onWrite(ec, bytes);
         });
 }
+
 void WebsocketConnection::onHandShake(boost::system::error_code ec){
 
     CHECK_ASIO_ERROR_(ec)
-    _serverState->join(shared_from_this());
+    _serverState->join(this);
     callAsyncRead();
 }
 
