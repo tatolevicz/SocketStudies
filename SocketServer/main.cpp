@@ -5,5 +5,5 @@
 #include "ServerBeast_1.h"
 
 int main() {
-    return ServerBeast_1::execute();
+    return gr_video::GR_ChatServer::execute();
 }

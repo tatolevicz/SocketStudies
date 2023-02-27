@@ -1,0 +1,16 @@
+//
+// Created by Arthur Motelevicz on 26/02/23.
+//
+
+#include "ServerBeastTemplate.h.template"
+#include "ServerState.h"
+
+//server beast
+namespace sb {
+
+ServerBeastTemplate::ServerBeastTemplate(std::shared_ptr<ServerState> state):
+        _servertate(state){
+
+}
+
+}

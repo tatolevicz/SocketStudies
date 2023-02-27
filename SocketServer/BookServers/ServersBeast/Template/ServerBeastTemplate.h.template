@@ -1,0 +1,25 @@
+//
+// Created by Arthur Motelevicz on 26/02/23.
+//
+
+#ifndef SOCKET_SERVERBEASTTEMPLATE_H_TEMPLATE
+#define SOCKET_SERVERBEASTTEMPLATE_H_TEMPLATE
+
+#include <boost/asio.hpp>
+#include <boost/beast.hpp>
+
+//server beast
+namespace sb{
+class ServerState;
+class ServerBeastTemplate : public std::enable_shared_from_this<ServerBeastTemplate>{
+    public:
+    ServerBeastTemplate(std::shared_ptr<ServerState>& sharedState);
+
+    private:
+    std::shared_ptr<ServerState> _serverState{nullptr};
+
+};
+
+}
+
+#endif //SOCKET_SERVERBEASTTEMPLATE_H_TEMPLATE

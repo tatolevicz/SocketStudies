@@ -29,7 +29,10 @@ add_executable(${PROJECT_NAME}
         GetRichVideo/WebsocketSession.cpp
         GetRichVideo/WebsocketSession.h
         BookServers/PageServer.cpp
-        BookServers/PageServer.h BookServers/ServerBeast_1.cpp BookServers/ServerBeast_1.h)
+        BookServers/PageServer.h
+        BookServers/ServerBeast_1.cpp
+        BookServers/ServerBeast_1.h
+        BookServers/ServersBeast/Client.h BookServers/ServersBeast/Client.cpp BookServers/ServersBeast/ServerState.cpp BookServers/ServersBeast/ServerState.h BookServers/ServersBeast/Server.cpp BookServers/ServersBeast/Server.h BookServers/ServersBeast/Doorman.cpp BookServers/ServersBeast/Doorman.h BookServers/ServersBeast/HttpListener.cpp BookServers/ServersBeast/HttpListener.h BookServers/ServersBeast/WebsocketConnection.cpp BookServers/ServersBeast/WebsocketConnection.h)
 
 
 
@@ -60,4 +63,5 @@ target_include_directories(${PROJECT_NAME} PUBLIC
         BookServers
         OLC_Playlist
         GetRichVideo
+        BookServers/ServersBeast
         )
