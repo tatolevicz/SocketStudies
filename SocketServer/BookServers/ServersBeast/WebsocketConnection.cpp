@@ -8,9 +8,69 @@
 //server beast
 namespace sb {
 
-    WebsocketConnection::WebsocketConnection(std::shared_ptr<ServerState> state):
-            _serverState(std::move(state)) {
+WebsocketConnection::WebsocketConnection(boost::asio::ip::tcp::socket sock,
+                                         std::shared_ptr<ServerState> serverState):
+_sockStream(std::move(sock)),
+_serverState(std::move(serverState))
+{
 
+}
+
+WebsocketConnection::~WebsocketConnection(){
+    _serverState->leave(this);
+}
+
+void WebsocketConnection::send(const std::string& message){
+    _messageQueue.push_back(message);
+    callAsyncWrite();
+}
+
+void WebsocketConnection::onRead(boost::system::error_code ec, std::size_t bytes){
+
+    CHECK_ASIO_ERROR_(ec)
+
+    std::string message = boost::beast::buffers_to_string(_buffer.data());
+
+    std::cout << "Msg: " << message << "\n";
+
+    _serverState->send(message);
+
+    callAsyncRead();
+}
+
+void WebsocketConnection::callAsyncRead() {
+    _sockStream.async_read(_buffer,[&](boost::system::error_code ec, std::size_t bytes){
+        onRead(ec, bytes);
+    });
+}
+
+void WebsocketConnection::callAsyncWrite(){
+    _sockStream.async_write(boost::asio::buffer(_messageQueue.front()),
+        [this](boost::system::error_code ec, std::size_t bytes){
+            onWrite(ec, bytes);
+        });
+}
+void WebsocketConnection::onHandShake(boost::system::error_code ec){
+
+    CHECK_ASIO_ERROR_(ec)
+    _serverState->join(shared_from_this());
+    callAsyncRead();
+}
+
+void WebsocketConnection::onWrite(boost::system::error_code ec, std::size_t bytes){
+
+    CHECK_ASIO_ERROR_(ec)
+    _messageQueue.erase(_messageQueue.begin());
+
+    if(!_messageQueue.empty()){
+        callAsyncWrite();
     }
+}
+
+void WebsocketConnection::run(boost::beast::http::request<boost::beast::http::string_body>& _req){
+    _sockStream.async_accept(_req, [self = shared_from_this()](boost::system::error_code ec){
+        self->onHandShake(ec);
+    });
+}
 
 }

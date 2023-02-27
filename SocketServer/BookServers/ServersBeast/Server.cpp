@@ -16,7 +16,8 @@ Server::Server(std::shared_ptr <ServerState> state) :
 }
 
 void Server::start(){
-
+//    _serverState = std::make_shared<>()
+//    _doorMan
 }
 
 void Server::stop(){

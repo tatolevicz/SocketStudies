@@ -11,7 +11,6 @@
 
 using namespace boost;
 
-
 std::shared_ptr<std::string> _data;
 
 void ServerTests::readAsync(boost::asio::ip::tcp::socket& sock){
@@ -31,6 +30,7 @@ void ServerTests::readCB(const boost::system::error_code& ec,
     CHECK_ERROR_VOID(ec)
     for(int i = 0; i < bytes_read; i++) {
         print_bytes(buf, 1);
+//        std::cout << buf[i];
     }
 
     delete buf;
@@ -48,11 +48,11 @@ void ServerTests::print_bytes(const char* buffer, size_t size) {
 int ServerTests::execute(){
 
     system::error_code ec;
+
     asio::io_context ioc;
 
     //enpoint
     asio::ip::tcp::endpoint ep(asio::ip::address_v4::any(),1234);
-    CHECK_ERROR(ec)
 
     //socket - to read the accepted connection
 //    asio::ip::tcp::socket sock(ioc);
@@ -76,6 +76,8 @@ int ServerTests::execute(){
 
 
     asyncHandShake.execute();
+
+
     ioc.run();
 
     return 0;

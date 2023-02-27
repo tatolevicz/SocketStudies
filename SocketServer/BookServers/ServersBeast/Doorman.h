@@ -16,11 +16,12 @@ namespace sb {
     public:
         Doorman(boost::asio::io_context& ioc,
                 boost::asio::ip::tcp::endpoint& endpoint,
-                std::shared_ptr<ServerState> sharedStat);
+                std::shared_ptr<ServerState> serverState);
 
         void run();
 
     private:
+        void onAccept(boost::system::error_code ec);
         std::shared_ptr<ServerState> _serverState{nullptr};
         boost::asio::ip::tcp::acceptor _acceptor;
         boost::asio::ip::tcp::socket _sock;

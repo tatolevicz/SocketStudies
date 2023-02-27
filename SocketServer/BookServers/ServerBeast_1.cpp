@@ -34,9 +34,9 @@ int ServerBeast_1::execute() {
     beast::flat_buffer httpBuffer;
     beast::flat_buffer socketBuffer;
     beast::http::request<beast::http::string_body> httpReq;
-    beast::http::response<beast::http::string_body> httpResp;
 
     std::shared_ptr<beast::websocket::stream<asio::ip::tcp::socket>> socketStream;
+
     std::vector<std::shared_ptr<std::string>> messagesQueue;
 
     using ReadWriteCB = std::function<void (system::error_code ec, std::size_t bytes)>;

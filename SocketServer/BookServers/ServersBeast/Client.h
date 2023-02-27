@@ -11,14 +11,16 @@
 //server beast
 namespace sb {
     class ServerState;
+    class WebsocketConnection;
 
     class Client : public std::enable_shared_from_this<Client> {
     public:
         inline static unsigned long idCounter = 0;
-        Client(std::shared_ptr<boost::asio::ip::tcp::socket> sock);
+        Client(WebsocketConnection* connection);
         unsigned long getId() const;
+        WebsocketConnection* getConnection();
     private:
-        std::shared_ptr<boost::asio::ip::tcp::socket> _sock{nullptr};
+        WebsocketConnection* _connection{nullptr};
         unsigned long _id = 0;
     };
 

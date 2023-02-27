@@ -4,18 +4,23 @@
 
 #include "Client.h"
 #include "ServerState.h"
+#include "WebsocketConnection.h"
 
 //server beast
 namespace sb {
 
-Client::Client(std::shared_ptr<boost::asio::ip::tcp::socket> sock) :
-_sock(std::move(sock))
+Client::Client(WebsocketConnection* connection) :
+_connection(connection)
 {
     _id = ++idCounter;
 }
 
 unsigned long Client::getId() const {
     return _id;
+}
+
+WebsocketConnection* Client::getConnection(){
+    return _connection;
 }
 
 }

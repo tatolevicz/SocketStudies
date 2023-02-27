@@ -175,6 +175,7 @@ var player = new function()
 
         ctx.save();
         ctx.translate(receivedMsg.x,receivedMsg.y);
+        // ctx.translate(this.x,this.y);
 
         let message = {
             x: this.x, 

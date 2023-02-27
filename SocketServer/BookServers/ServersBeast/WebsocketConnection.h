@@ -14,11 +14,28 @@ namespace sb {
 
     class WebsocketConnection : public std::enable_shared_from_this<WebsocketConnection> {
     public:
-        WebsocketConnection(std::shared_ptr<ServerState> sharedState);
+        WebsocketConnection(boost::asio::ip::tcp::socket sock,
+                            std::shared_ptr<ServerState> serverState);
+
+        ~WebsocketConnection();
+
+        void run(boost::beast::http::request<boost::beast::http::string_body>& _req);
+
+        void send(const std::string& message);
 
     private:
-        std::shared_ptr<ServerState> _serverState{nullptr};
 
+        void callAsyncRead();
+        void callAsyncWrite();
+
+        void onRead(boost::system::error_code ec, std::size_t bytes);
+        void onWrite(boost::system::error_code ec, std::size_t bytes);
+        void onHandShake(boost::system::error_code ec);
+
+        std::shared_ptr<ServerState> _serverState{nullptr};
+        boost::beast::websocket::stream<boost::asio::ip::tcp::socket> _sockStream;
+        boost::beast::flat_buffer _buffer;
+        std::vector<std::string> _messageQueue;
     };
 
 }
