@@ -8,9 +8,30 @@
 
 int main() {
 //
-//    sb::Server s;
-//    s.start();
-//
-//    return 0;
+    sb::Server s;
+    std::thread worker([&](){
+        s.start();
+    });
+    worker.detach();
+
+    bool quit = false;
+    while(!quit){
+        std::string input;
+        std::getline(std::cin, input);
+
+        if(input == "stop"){
+            std::cout << "Close all streams!!\n";
+            s.stop();
+        }
+        if(input == "close"){
+            std::cout << "Close all streams!!\n";
+            s.disconnectAll();
+        }
+        else if(input == "quit"){
+            quit = true;
+        }
+    }
+
+    return 0;
     return PingPongCloseTests::execute();
 }

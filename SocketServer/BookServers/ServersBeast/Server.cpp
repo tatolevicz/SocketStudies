@@ -24,6 +24,22 @@ void Server::start(){
 
 void Server::stop(){
 
+    // Capture SIGINT and SIGTERM to perform a clean shutdown
+    boost::asio::signal_set signals(_ioc, SIGINT, SIGTERM);
+    signals.async_wait(
+    [&](boost::system::error_code const&, int)
+    {
+        disconnectAll();
+        _doorMan->stop();
+        // Stop the io_context. This will cause run()
+        // to return immediately, eventually destroying the
+        // io_context and any remaining handlers in it.
+        _ioc.stop();
+    });
+}
+
+void Server::disconnectAll() {
+    _serverState->leaveAll();
 }
 
 }

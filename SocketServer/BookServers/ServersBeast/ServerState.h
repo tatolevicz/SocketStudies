@@ -30,8 +30,8 @@ namespace sb {
         ServerState();
         std::shared_ptr<Client> join(WebsocketConnection* connection);
         void leave(WebsocketConnection* connection);
-
         void send(const std::string& message);
+        void leaveAll();
 
     private:
         std::vector<std::shared_ptr<Client>> _clients;

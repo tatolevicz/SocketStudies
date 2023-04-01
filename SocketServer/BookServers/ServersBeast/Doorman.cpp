@@ -62,4 +62,8 @@ void Doorman::run(){
     });
 }
 
+void Doorman::stop(){
+    _acceptor.close();
+}
+
 }

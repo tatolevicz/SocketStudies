@@ -18,7 +18,7 @@ namespace sb {
         Server();
         void start();
         void stop();
-
+        void disconnectAll();
     private:
         std::shared_ptr<ServerState> _serverState{nullptr};
         std::shared_ptr<Doorman> _doorMan{nullptr};

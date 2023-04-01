@@ -23,6 +23,8 @@ namespace sb {
 
         void send(const std::string& message);
 
+        void disconnect();
+
     private:
 
         void callAsyncRead();

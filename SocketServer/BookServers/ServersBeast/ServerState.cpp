@@ -36,4 +36,11 @@ void ServerState::send(const std::string& message){
         c->getConnection()->send(message);
 }
 
+void ServerState::leaveAll(){
+    for(auto c : _clients)
+        c->getConnection()->disconnect();
+
+    _clients.clear();
+}
+
 }

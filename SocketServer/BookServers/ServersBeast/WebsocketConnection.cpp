@@ -75,4 +75,10 @@ void WebsocketConnection::run(boost::beast::http::request<boost::beast::http::st
     });
 }
 
+void WebsocketConnection::disconnect(){
+    _sockStream.async_close(boost::beast::websocket::normal,[](boost::system::error_code ec){
+        CHECK_ASIO_ERROR_(ec)
+    });
+}
+
 }

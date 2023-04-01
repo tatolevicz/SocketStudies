@@ -19,6 +19,7 @@ namespace sb {
                 std::shared_ptr<ServerState> serverState);
 
         void run();
+        void stop();
 
     private:
         void onAccept(boost::system::error_code ec);
