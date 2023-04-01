@@ -32,7 +32,7 @@ add_executable(${PROJECT_NAME}
         BookServers/PageServer.h
         BookServers/ServerBeast_1.cpp
         BookServers/ServerBeast_1.h
-        BookServers/ServersBeast/Client.h BookServers/ServersBeast/Client.cpp BookServers/ServersBeast/ServerState.cpp BookServers/ServersBeast/ServerState.h BookServers/ServersBeast/Server.cpp BookServers/ServersBeast/Server.h BookServers/ServersBeast/Doorman.cpp BookServers/ServersBeast/Doorman.h BookServers/ServersBeast/HttpListener.cpp BookServers/ServersBeast/HttpListener.h BookServers/ServersBeast/WebsocketConnection.cpp BookServers/ServersBeast/WebsocketConnection.h)
+        BookServers/ServersBeast/Client.h BookServers/ServersBeast/Client.cpp BookServers/ServersBeast/ServerState.cpp BookServers/ServersBeast/ServerState.h BookServers/ServersBeast/Server.cpp BookServers/ServersBeast/Server.h BookServers/ServersBeast/Doorman.cpp BookServers/ServersBeast/Doorman.h BookServers/ServersBeast/HttpListener.cpp BookServers/ServersBeast/HttpListener.h BookServers/ServersBeast/WebsocketConnection.cpp BookServers/ServersBeast/WebsocketConnection.h BookServers/PingPongCloseTests.cpp BookServers/PingPongCloseTests.h)
 
 
 

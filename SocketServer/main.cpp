@@ -3,6 +3,7 @@
 #include "GR_ChatServer.h"
 #include "PageServer.h"
 #include "ServerBeast_1.h"
+#include "PingPongCloseTests.h"
 #include "Server.h"
 
 int main() {
@@ -11,5 +12,5 @@ int main() {
 //    s.start();
 //
 //    return 0;
-    return PageServer::execute();
+    return PingPongCloseTests::execute();
 }
